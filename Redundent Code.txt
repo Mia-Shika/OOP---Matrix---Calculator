@@ -1,0 +1,51 @@
+        //I beam for mouse cursor whenever the mouse is hovering above the box.
+            if(box_1.Mouse_Over_Box || box_2.Mouse_Over_Box || box_3.Mouse_Over_Box || box_4.Mouse_Over_Box) SetMouseCursor(MOUSE_CURSOR_IBEAM);
+            else SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
+
+        //(Box)-----------------------------------------------------------------------------------------------------
+        DrawRectangleRec( number_box_, GRAY);
+        if(box_.Mouse_Over_Box)
+        {
+            DrawRectangleRec(number_box_, LIGHTGRAY);
+            if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) box_.Clicked_Uppon = 2;
+        }
+        if(box_.Clicked_Uppon == 2)
+        {
+            DrawRectangleRec(number_box_, LIGHTGRAY);
+            // Get input from keyboard
+            int key = GetKeyPressed();
+            // Handle numeric input (0-9)
+            if (key >= 48 && key <= 57)  // ASCII codes for '0' to '9'
+            {  
+                box_.inputNumber += (char)key;
+            }
+
+            // Handle Enter key to confirm input and store the number
+            if (key == KEY_ENTER && !box_.inputNumber.empty()) 
+            {
+                int enteredNumber = std::stoi(box_.inputNumber);  // Convert input string to integer
+                box_.numbersArray.push_back(enteredNumber);  // Store the number in the array
+                //box_.inputNumber = "";  // Clear the input for the next number (redundent)
+                box_.numberEntered = true;
+                box_.Clicked_Uppon = 0;
+            }
+            // Handle Backspace to delete the last digit
+            if (key == KEY_BACKSPACE && !box_.inputNumber.empty()) 
+            {
+                box_.inputNumber.pop_back();  // Remove the last character
+            }
+            if (key == KEY_BACKSPACE && box_.inputNumber.empty()) box_.numbersArray.clear();
+
+            //Terminal troubleshooting.
+            for (size_t i = 0; i < box_.numbersArray.size(); i++) 
+            { 
+                std::cout << box_.numbersArray[i] << " ";
+            }
+            std::cout << std::endl;
+        
+        }
+        // Display the input number so far
+        if (!box_.inputNumber.empty()) {
+        DrawText((box_.inputNumber).c_str(), number_box_.x + 10, number_box_.y + 13, number_Size, BLACK);
+        }

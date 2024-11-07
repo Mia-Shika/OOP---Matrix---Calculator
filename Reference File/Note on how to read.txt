@@ -1,0 +1,37 @@
+Notes: (do crtl + F to find the corrisponding varible)
+    Foundations are the varibles or fuctions that plays a very big role in determine many part of the code.
+
+
+WINDOW:
+    cellSize (foundations): define in pixel. To split the window into define cells to better help render the snake and keep the movement of the snake in line with the grid. Items will be print inside of the cell. 
+    cellCount (foundations): the number of cell in one row. 
+        --> When multiplying 'cellSize' * 'cellCount' we get the resolution of the window (in this case 750x750).
+    
+    speed: Define the default speed of the snake. (float)
+    offset: Spawn position of the snake. (int)
+
+GAME:
+
+    FOOD:
+        class is to create a container to contain all of the attribute of the items in this case 'Food' for snake.
+            
+            position (foundations) in this case is not fully define to avoid the 'Food' spawning on to the snake position.
+            Draw exist as void as a fuction to use drawing fuction with the preinputed varibles to avoid having to re-entering it. (food.Draw()) 
+            image (a very inefficition due to using image to assign a path of the image to is makes it very easy to mess up the naming skeem down the line) contains the address to the image so that game can easily access the image.
+
+
+    lastupdatetime: Speed of which the game is updated.
+    Interval: is determine by 'speed' (line 4).
+
+DRAW:
+
+    ClearBackground: a function from raylib.h lirary which helps to put the background of the window into one single colour to avoid flickering and a foundations for rendering in this case of the snake game (Green).
+
+Fuctions use in the code:
+DrawRectangle()
+Image 
+LoadImage("...")
+LoadTextureFromImage()
+UnloadImage()
+deque  
+    size(): Returns the number of elements in the deque.
